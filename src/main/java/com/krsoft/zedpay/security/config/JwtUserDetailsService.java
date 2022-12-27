@@ -18,8 +18,14 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String loginPassword) throws UsernameNotFoundException {
+        com.krsoft.zedpay.entities.User user;
         String[] splitted = loginPassword.split(":");
-        com.krsoft.zedpay.entities.User user = this.userService.findByUserLoginAndUserPassword(splitted[0], splitted[1]);
+        if (splitted.length == 2) {
+            user = this.userService.findByUserLoginAndUserPassword(splitted[0], splitted[1]);
+        } else {
+            user = this.userService.findByUserLogin(loginPassword);
+        }
+
         if (user != null) {
             return new ZedPayUserDetaills(user.getUserId(), user.getUserPhone(), user.getUserEmail(), user.getUserLogin(), user.getUserPassword(), new ArrayList<>());
         } else {

@@ -108,7 +108,7 @@ public class EmailSenderServiceImpl implements EmailSenderService {
             //helper.addAttachment("MergedPaymentVoucher.pdf", new ByteArrayResource(attachment));
             log.info("Sending email from {}", from);
 
-            //mailSender.send(msg);
+            mailSender.send(msg);
             responseAPI.setStatus(true);
             log.info("Email successfully sent to {}", to);
         } catch (MessagingException e) {
