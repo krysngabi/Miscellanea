@@ -1,14 +1,11 @@
 package com.krsoft.zedpay.security.controllers;
 
-import com.krsoft.zedpay.models.ResponseAPI;
 import com.krsoft.zedpay.security.config.JwtTokenUtil;
 import com.krsoft.zedpay.security.config.JwtUserDetailsService;
 import com.krsoft.zedpay.security.models.JwtRequest;
 import com.krsoft.zedpay.security.models.JwtResponse;
-import com.krsoft.zedpay.security.models.ZedPayUserDetaills;
-import com.krsoft.zedpay.services.user.UserService;
+import com.krsoft.zedpay.security.models.MiscellaneaUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +42,7 @@ public class JwtAuthenticationController {
             return new ResponseEntity<>(jwtResponse, HttpStatus.BAD_REQUEST);
         }
 
-        final ZedPayUserDetaills userDetails = (ZedPayUserDetaills) userDetailsService.loadUserByLogin(user.getUserLogin());
+        final MiscellaneaUserDetails userDetails = (MiscellaneaUserDetails) userDetailsService.loadUserByLogin(user.getUserLogin());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
